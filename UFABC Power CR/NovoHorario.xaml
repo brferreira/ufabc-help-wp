@@ -1,0 +1,115 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UFABC_Power_CR.NovoHorario"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded_1">
+
+
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+
+
+
+            <shell:ApplicationBarIconButton 
+                x:Name="btSalvar" 
+                IconUri="/Imagens/save.png" 
+                Text="salvar" 
+                Click="btSalvar_Click_1"/>
+
+            <shell:ApplicationBarIconButton 
+                x:Name="appBarCancelButton" 
+                IconUri="/Imagens/cancel.png" 
+                Text="cancelar" 
+                Click="appBarCancelButton_Click"/>
+
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="itemsTemplate">
+
+            <Grid HorizontalAlignment="Left" Width="420">
+                
+
+                <TextBlock x:Name="tbItem"      
+                       
+                    Text="{Binding Materia}"  
+                    Grid.Column="0" Grid.ColumnSpan="100" 
+                     Margin="0, 0, 0, 0"
+                            TextWrapping="Wrap"/>
+            </Grid>
+        </DataTemplate>
+
+    </phone:PhoneApplicationPage.Resources>
+
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0,0,0,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="UFABC HELP!" Style="{StaticResource PhoneTextNormalStyle}"/>
+        </StackPanel>
+        
+        <!--ContentPanel - place additional content here-->
+        <!--Grid x:Name="ContentPanel" Margin="10,17,14,-336" Grid.RowSpan="12">-->
+        <ScrollViewer Margin="0,80,0,-396" Grid.RowSpan="2" >
+            <StackPanel  Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1000">
+                <TextBlock Text="Nova Atividade" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="#FF009A22"/>
+                <TextBlock Text="Tipo" />
+                <toolkit:ListPicker x:Name="listTipo"   SelectionChanged="listTipo_SelectionChanged">
+                    <ListBoxItem Content="Aula"/>
+                    <ListBoxItem Content="Extra-curricular"/>
+                </toolkit:ListPicker>
+                <TextBlock x:Name="tbAulas" Visibility="Collapsed" Text="Aulas" ></TextBlock>
+                <toolkit:ListPicker  FullModeHeader="Selecione a aula" Visibility="Collapsed" x:Name="listAulas" 
+                                
+                                ItemsSource="{Binding MateriasNoQuad}"
+                                ItemTemplate="{StaticResource itemsTemplate}" ExpansionMode="FullScreenOnly" Margin="12">
+                    <toolkit:ListPicker.FullModeItemTemplate>
+                        <DataTemplate>
+
+                            <Grid HorizontalAlignment="Stretch" Width="420">
+                                
+
+                                <TextBlock x:Name="tbItem"      
+                       
+                    Text="{Binding Materia}"  
+                    FontSize="{StaticResource PhoneFontSizeLarge}"
+                    Grid.Column="0" Grid.ColumnSpan="100" 
+                     Margin="0, 0, 0, 0"
+                            TextWrapping="Wrap"/>
+                            </Grid>
+                        </DataTemplate>
+                    </toolkit:ListPicker.FullModeItemTemplate>
+                </toolkit:ListPicker>
+                <TextBlock Visibility="Collapsed" x:Name="tbExtras"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Nome da Atividade" VerticalAlignment="Top"/>
+                <TextBox x:Name="tboxExtras" Visibility="Collapsed" HorizontalAlignment="Left" Height="72" Width="660"  InputScope="Text"/>
+                <TextBlock Text="Horário" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.03,0.148"/>
+                <toolkit:TimePicker x:Name="tpHoraInicio" Header="Inicio"  ValueChanged="tpHoraInicio_ValueChanged"/>
+                <toolkit:TimePicker Header="Fim" x:Name="tpHoraFim"  ValueChanged="tpHoraFim_ValueChanged"/>
+                <TextBlock Text="Dias" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.03,0.148"/>
+                <toolkit:RecurringDaysPicker  x:Name="dayPicker" Height="77" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--/Grid>-->
+    </Grid>
+
+</phone:PhoneApplicationPage>

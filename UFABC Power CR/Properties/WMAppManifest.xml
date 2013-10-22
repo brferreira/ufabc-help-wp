@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
+  <App xmlns="" ProductID="{0f123248-8430-48da-8fa3-c2a6f1a86794}" Title="UFABC Help!" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="André Gama Leal" Description="O UFABC Power CR é um aplicativo desenvolvido para facilitar a vida dos estudantes da Universidade Federal do ABC (UFABC).&#xD;&#xA;&#xD;&#xA;Com ele é possível organizar as suas tarefas, acessar a sua grade de aulas, calcular CR e CA e muito mais." Publisher="UFABC_Power_CR" BitsPerPixel="32">
+    <IconPath IsRelative="true" IsResource="false">help logo.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_IDENTITY_USER" />
+      <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
+      <Capability Name="ID_CAP_SENSORS" />
+      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_CONTACTS" />
+      <Capability Name="ID_CAP_APPOINTMENTS" />
+      <Capability Name="ID_CAP_PHONEDIALER" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="Login.xaml" />
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="UFABC_Power_CRToken" TaskName="_default">
+        <TemplateType5>
+          <BackgroundImageURI IsRelative="true" IsResource="false">ufabc help.png</BackgroundImageURI>
+          <Count>0</Count>
+          <Title>UFABC Help!</Title>
+        </TemplateType5>
+      </PrimaryToken>
+    </Tokens>
+  </App>
+</Deployment>

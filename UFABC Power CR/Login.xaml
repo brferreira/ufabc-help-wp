@@ -1,0 +1,42 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UFABC_Power_CR.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    shell:SystemTray.IsVisible="False"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Loaded="PhoneApplicationPage_Loaded">
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    
+    <Grid x:Name="LayoutRoot"  Background="Transparent" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="110"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel HorizontalAlignment="Left" Height="294" Grid.Row="1" VerticalAlignment="Top" Width="470" Margin="10,27,0,0" >
+            <TextBlock TextWrapping="Wrap" Text="Nome de usuário"/>              
+            <toolkit:AutoCompleteBox x:Name="tbNome" Margin="0,0,27,0" IsDropDownOpen="True"/>
+            <TextBlock  TextWrapping="Wrap" Text="Senha" />
+            <PasswordBox x:Name="pbSenha" MaxLength="16" Margin="0,0,27,0" />            
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="147" Margin="0,501,0,0" Grid.Row="1" VerticalAlignment="Top" Width="470">
+            <Button x:Name="btLogin" Content="Login" Click="btLogin_Click" />
+            <Button x:Name="btCadastro" Content="Cadastrar usuário" Click="Button_Click"/>
+        </StackPanel>
+        <Image HorizontalAlignment="Left" Height="100" Margin="10,0,0,0" VerticalAlignment="Top" Width="100" Source="/Imagens/help!.png"/>
+        <TextBlock Text="UFABC Help!" HorizontalAlignment="Left" Margin="129,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.384,-0.167" FontSize="56">
+        </TextBlock>
+
+        <!--ContentPanel - place additional content here-->
+    </Grid>
+
+</phone:PhoneApplicationPage>

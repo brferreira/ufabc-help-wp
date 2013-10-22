@@ -1,0 +1,97 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UFABC_Power_CR.NovaTarefa"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--ContentPanel - place additional content here.-->
+
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="UFABC HELP!" Style="{StaticResource PhoneTextNormalStyle}"/>
+        </StackPanel>
+        <ScrollViewer Margin="0,80,0,-396" Grid.RowSpan="2" >
+            <StackPanel x:Name="ContentPanel"  Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1120">
+                <TextBlock Text="Nova Tarefa" FontSize="{StaticResource PhoneFontSizeLarge}" HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="#FF009A22"/>
+                <TextBlock Text="Nome"/>
+                <TextBox x:Name="newTaskNameTextBox" MaxLength="40" />
+
+
+                <TextBlock Text="Categoria"/>
+                <toolkit:ListPicker
+                x:Name="categoriesListPicker"
+                ItemsSource="{Binding CategoriesList}"
+                DisplayMemberPath="Name"/>
+                
+
+                <TextBlock Text="Data"/>
+                <toolkit:DatePicker
+                x:Name="DatePicker1"
+                ValueStringFormat="{}{0:d}"
+                ValueChanged="DatePicker1_ValueChanged_1" >
+                </toolkit:DatePicker>
+
+                <TextBlock Text="Horário"/>
+                <toolkit:TimePicker
+                x:Name="horaPicker"
+                ValueChanged="horaPicker_ValueChanged_1">
+                </toolkit:TimePicker>
+
+                <TextBlock Text="Detalhes"/>
+                <TextBox x:Name="tbdDetalhes" Height="167" InputScope="Text" TextOptions.TextHintingMode="Animated" TextWrapping="Wrap" />
+
+
+                <!--toolkit:ListPicker
+                x:Name="matListPicker"
+                ItemsSource="{Binding MateriasList }"
+                DisplayMemberPath="NomeMateria">
+                
+            </toolkit:ListPicker-->
+                <!--ScrollBar Height="2" RenderTransformOrigin="0.5,0.5">
+                    <ScrollBar.RenderTransform>
+                        <CompositeTransform ScaleY="-1"/>
+
+                    </ScrollBar.RenderTransform>
+                </ScrollBar>-->
+            </StackPanel>
+        </ScrollViewer>
+
+
+
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+
+            <shell:ApplicationBarIconButton 
+                x:Name="appBarOkButton" 
+                IconUri="/Imagens/save.png" 
+                Text="salvar" 
+                Click="appBarOkButton_Click"/>
+
+            <shell:ApplicationBarIconButton 
+                x:Name="appBarCancelButton" 
+                IconUri="/Imagens/cancel.png" 
+                Text="cancelar" 
+                Click="appBarCancelButton_Click"/>
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

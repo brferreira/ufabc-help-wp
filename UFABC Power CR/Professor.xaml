@@ -1,0 +1,150 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    x:Class="UFABC_Power_CR.Professor" 
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+
+            <shell:ApplicationBarIconButton
+                x:Name="btEmail" 
+                IconUri="/Imagens/feature.email.png" 
+                Text="enviar e-mail"
+                IsEnabled="False"
+                Click= "btEmail_Click"/>
+
+            <shell:ApplicationBarIconButton
+                x:Name="btTel" 
+                IconUri="/Imagens/feature.phone.png" 
+                Text="telefonar"
+                IsEnabled="False"
+                Click= "btTel_Click"/>
+
+            <shell:ApplicationBar.MenuItems>
+
+                <shell:ApplicationBarMenuItem
+                x:Name="btEdita"
+                Text="editar informações"
+                IsEnabled="False"
+                Click="btEdita_Click" />
+
+                <shell:ApplicationBarMenuItem
+                x:Name="btExclui"
+                Text="excluir professor"
+                IsEnabled="False"
+                Click="btExclui_Click" />
+
+            </shell:ApplicationBar.MenuItems>
+
+
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,23,0,28">
+            <TextBlock x:Name="tbNome" FontSize="{StaticResource PhoneFontSizeMediumLarge}" FontFamily="{StaticResource PhoneFontFamilyNormal}" Foreground="{StaticResource PhoneForegroundBrush }"  Text="UFABC HELP!" TextWrapping="Wrap"/>
+            <TextBlock x:Name="tbCentro" Style="{StaticResource PhoneTextSmallStyle}" Text="Centro" Margin="0,0,12,0" />
+            <TextBlock x:Name="tbEmail"  Style="{StaticResource PhoneTextSubtleStyle}" Text="Email" Margin="0,0,12,0"/>
+            <TextBlock x:Name="tbTel" Style="{StaticResource PhoneTextSubtleStyle}"  Text="Telefone" Margin="0,0,12,0"/>
+        </StackPanel>
+
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,10,10">
+            <controls:Pivot  HorizontalAlignment="Left" Height="1067"  VerticalAlignment="Top" Width="448" Margin="0,-47,0,-498" Foreground="#FF009A22">
+                <controls:PivotItem Header="avaliações" Margin="0,10,-3,-160" Foreground="{StaticResource PhoneForegroundBrush}" >
+                    <ScrollViewer Grid.Row="2" Height="934">
+                        <Grid Height="985" Width="435">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="225" />
+                                <ColumnDefinition Width="180" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+
+                            </Grid.RowDefinitions>
+                            <TextBlock  Text="Nº de Avaliações:" FontSize="28" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
+                            <TextBlock  Text="CR Alunos:" FontSize="28" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" />
+                            <TextBlock  Text="CR Professor:" FontSize="28" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" />
+                            <TextBlock x:Name="tbExigencia" Text="Exigencia:" FontSize="28" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" />
+                            <TextBlock x:Name="tbAvalicao" Text="Avaliação:" FontSize="28" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" />
+                            <TextBlock x:Name="tbDidatica" Text="Didática:" FontSize="28" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" />
+                            <TextBlock x:Name="tbAprofundamento" Text="Aprofundamento:" FontSize="28" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" />
+                            <TextBlock x:Name="tbOrganizacao" Text="Organização:" FontSize="28" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" />
+                            <TextBlock x:Name="tbDisponibilidade" Text="Disponibilidade:" FontSize="28" Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" />
+                            <TextBlock x:Name="tbRelacionamento" Text="Relacionamento:" FontSize="28" Grid.Column="0" Grid.Row="9" VerticalAlignment="Center" />
+                            <toolkit:Rating x:Name="rtExigencia" Grid.Row="2" Margin="0,38,-35,39" Grid.RowSpan="3" Grid.Column="1" ReadOnly="True" AllowHalfItemIncrement="True" AllowSelectingZero="True" />
+                            <toolkit:Rating x:Name="rtAvaliacao" Grid.Row="3" Margin="0,38,-35,39" Grid.RowSpan="3" Grid.Column="1" ReadOnly="True" AllowHalfItemIncrement="True" AllowSelectingZero="True" />
+                            <toolkit:Rating x:Name="rtDidatica" Grid.Column="4" Grid.Row="4" Margin="0,38,-35,39" Grid.RowSpan="3" ReadOnly="True" AllowHalfItemIncrement="True" AllowSelectingZero="True" />
+                            <toolkit:Rating x:Name="rtAprofundamento" Grid.Column="1" Grid.Row="5" Margin="0,38,-33,39" Grid.RowSpan="3" ReadOnly="True" AllowHalfItemIncrement="True" AllowSelectingZero="True" />
+                            <toolkit:Rating x:Name="rtOrganizacao" Grid.Column="1" Grid.Row="6" Margin="0,38,-33,39" Grid.RowSpan="3" ReadOnly="True" AllowHalfItemIncrement="True" AllowSelectingZero="True" />
+                            <toolkit:Rating x:Name="rtDisponibilidade" Grid.Column="1" Grid.Row="7" Margin="0,38,-33,39" Grid.RowSpan="3" ReadOnly="True" AllowHalfItemIncrement="True" AllowSelectingZero="True" />
+                            <toolkit:Rating x:Name="rtRelacionamento" Grid.Column="1" Grid.Row="8" Margin="0,38,-33,39" Grid.RowSpan="3" ReadOnly="True" AllowHalfItemIncrement="True" AllowSelectingZero="True" />
+                            <TextBlock x:Name="tbCR_Prof" Text="" FontSize="28" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" />
+                            <TextBlock x:Name="tbCR_Alunos" Text="" FontSize="28" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" />
+                            <TextBlock x:Name="tbN_Avaliacoes" Text="" FontSize="28" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" />
+                        </Grid>
+                    </ScrollViewer>
+                </controls:PivotItem>
+                <controls:PivotItem Header="comentários" Margin="0,10,-3,27" Foreground="{StaticResource PhoneForegroundBrush}" >
+                    <ListBox x:Name="lbComentarios" HorizontalAlignment="Left" Height="456" VerticalAlignment="Top" Width="435" ItemsSource="{Binding}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel >
+                                    <TextBlock Text="{Binding Texto}"  TextWrapping="Wrap" FontStyle="Italic" FontSize="22"/>
+                                    <StackPanel  Orientation="Horizontal">
+                                        <Image Source="{Binding Pasta }" Width="40" Height="40"></Image>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Materia}" Style="{StaticResource PhoneTextSubtleStyle}" ></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel  Orientation="Horizontal">
+                                        <Image Source="{Binding Calendario}" Width="40" Height="40"></Image>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Quadrimestre}" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel  Orientation="Horizontal">
+                                        <Image Source="{Binding Lapis}" Width="40" Height="40"></Image>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Conceito}" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                                    </StackPanel>
+                                    <TextBlock Text="  " />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </controls:PivotItem>
+            </controls:Pivot>
+
+        </Grid>
+    </Grid>
+
+
+</phone:PhoneApplicationPage>

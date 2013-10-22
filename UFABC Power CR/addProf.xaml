@@ -1,0 +1,76 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UFABC_Power_CR.addProf"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+
+            <shell:ApplicationBarIconButton 
+                x:Name="btSalvar" 
+                IconUri="/Imagens/save.png" 
+                Text="salvar" 
+                Click="btSalvar_Click"/>
+
+            <shell:ApplicationBarIconButton 
+                x:Name="btCancelar" 
+                IconUri="/Imagens/cancel.png" 
+                Text="cancelar" 
+                Click="btCancelar_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="UFABC HELP!" Style="{StaticResource PhoneTextNormalStyle}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <ScrollViewer Margin="0,80,0,-396" Grid.RowSpan="2" >
+            <StackPanel x:Name="ContentPanel" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1057">
+                <TextBlock Text="Editar Professor" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                <TextBlock Text="Nome"/>
+                <TextBox x:Name="tbNome" InputScope="PersonalFullName"/>
+                <TextBlock Text="Centro" />
+                <toolkit:ListPicker x:Name="lpCentro">
+                    <toolkit:ListPickerItem Content="CECS" />
+                    <toolkit:ListPickerItem Content="CMCC" />
+                    <toolkit:ListPickerItem Content="CCNH" />
+                </toolkit:ListPicker>
+                <TextBlock Text="Sala"/>
+                <TextBox x:Name="tbSala" MaxLength="12"/>
+                <TextBlock Text="Local" />
+                <toolkit:ListPicker x:Name="lpLocal">
+                    <toolkit:ListPickerItem Content="Bloco A" />
+                    <toolkit:ListPickerItem Content="Bloco B" />
+                    <toolkit:ListPickerItem Content="Bloco Sigma" />
+                    <toolkit:ListPickerItem Content="Bloco Delta" />
+                </toolkit:ListPicker>
+                <TextBlock Text="E-mail"/>
+                <TextBox x:Name="tbEmail" InputScope="EmailUserName"/>
+                <TextBlock Text="Telefone"/>
+                <TextBox x:Name="tbTel" InputScope="TelephoneNumber" MaxLength="13"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</phone:PhoneApplicationPage>
