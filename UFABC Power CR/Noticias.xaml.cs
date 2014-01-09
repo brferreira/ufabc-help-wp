@@ -16,6 +16,7 @@ using System.ServiceModel.Syndication;
 using Microsoft.Phone.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Phone.Shell;
+using System.Threading.Tasks;
 
 
 namespace UFABC_Power_CR
@@ -44,10 +45,10 @@ namespace UFABC_Power_CR
             InitializeComponent();
         }
 
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        private async void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             lerFeed();
-            baixar_noticias();
+            await baixar_noticias();
         }
 
 
@@ -185,22 +186,35 @@ namespace UFABC_Power_CR
         #region noticiasHelp
 
 
-        private void baixar_noticias()
+        private async Task baixar_noticias()
         {
-              WebClient wc = new WebClient();
+              /*WebClient wc = new WebClient();
                 wc.DownloadStringAsync(
-                   new Uri("http://www.ufabchelp.me/server/index.php/news"));
-                SystemTray.SetIsVisible(this, true);
-                SystemTray.SetOpacity(this, 0);
-                prog = new ProgressIndicator();
-                prog.IsVisible = true;
-                prog.Text = "baixando notícias";
-                prog.IsIndeterminate = true;
-                SystemTray.SetProgressIndicator(this, prog);
-                wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+                   new Uri("http://www.ufabchelp.me/server/index.php/news"));*/
+            SystemTray.SetIsVisible(this, true);
+            SystemTray.SetOpacity(this, 0);
+            prog = new ProgressIndicator();
+            prog.IsVisible = true;
+            prog.Text = "baixando notícias";
+            prog.IsIndeterminate = true;
+            SystemTray.SetProgressIndicator(this, prog);
+            //wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+            await MainPage.webServiceDataContext.LoadData();
+            lbHelp.DataContext = MainPage.webServiceDataContext;
+            lbHelp.ItemsSource = MainPage.webServiceDataContext.News;
+            prog.IsVisible = false;
         }
 
-        void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        private void lbHelp_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Model.News selected = (Model.News)e.AddedItems[0];
+                NavigationService.Navigate(new Uri("/DetalheNoticia.xaml?id=" + selected.Id.ToString(), UriKind.Relative));
+            }
+        }
+
+        /*void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             try
             {
@@ -229,7 +243,7 @@ namespace UFABC_Power_CR
             {
                 MessageBox.Show(erro.Message);
             }
-        }
+        }*/
 
 
         #endregion

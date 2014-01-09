@@ -37,6 +37,9 @@ namespace UFABC_Power_CR
         }
 
         #region noticias
+        // Objeto usado para comunicar com o webservice (somente para noticias no momento)
+        public static Model.WebServiceDataContext webServiceDataContext = new Model.WebServiceDataContext(new Uri("http://ufabchelp.me"));
+
         /*void lerFeed()
         {
 
