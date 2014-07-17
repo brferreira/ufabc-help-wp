@@ -75,6 +75,7 @@ namespace UFABC_Power_CR
             App.aluno = null;
             App.ViewModel = null;
             NavigationService.RemoveBackEntry();
+            App.login = false;
             NavigationService.Navigate(new Uri("/Login.xaml", UriKind.Relative));
         }
 

@@ -87,8 +87,15 @@ namespace UFABC_Power_CR
             {
                 if (App.db.Professores.Any(x => x.Nome == tbProfessor.Text) == true)
                 {
-                    App.professor = tbProfessor.Text;
-                    NavigationService.Navigate(new Uri("/Professor.xaml", UriKind.Relative));
+                    if (App.db.Aluno.First().Tipo_Usuario == 1)
+                    {
+                        App.professor = tbProfessor.Text;
+                        NavigationService.Navigate(new Uri("/Professor.xaml", UriKind.Relative));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Você não tem permissão para acessar este conteúdo.");
+                    }
                 }
                 else
                 {
@@ -99,8 +106,15 @@ namespace UFABC_Power_CR
 
         private void tbNome_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            App.disciplina = tbNome.Text;
-            NavigationService.Navigate(new Uri("/Disciplina.xaml", UriKind.Relative));
+            if (App.db.Aluno.First().Tipo_Usuario == 1)
+            {
+                App.disciplina = tbNome.Text;
+                NavigationService.Navigate(new Uri("/Disciplina.xaml", UriKind.Relative));
+            }
+            else
+            {
+                MessageBox.Show("Você não tem permissão para acessar este conteúdo.");
+            }
         }
     }
 }

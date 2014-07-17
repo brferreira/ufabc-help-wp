@@ -22,8 +22,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="UFABC HELP!" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="entidades" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="#FF009A22"/>
+            <TextBlock Text="UFABC Power CR" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="entidades" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -79,7 +79,7 @@
                 Grid.Row="1"
                 Grid.Column="2" />
             <TextBlock
-                Text = "Atlética - SA" TextAlignment="Center" FontSize="14"
+                Text = "Atlética" TextAlignment="Center" FontSize="14"
                 Grid.Row="1"
                 Grid.Column="4" />
             <TextBlock

@@ -19,61 +19,15 @@ namespace UFABC_Power_CR
             InitializeComponent();
 
             this.DataContext = App.ViewModel;
-           
-            
-        }
-
-
-        private void listTipo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (listTipo.SelectedIndex == 0)
-                {
-                    tbAulas.Visibility = System.Windows.Visibility.Visible;
-                    listAulas.Visibility = System.Windows.Visibility.Visible;
-                    tbExtras.Visibility = System.Windows.Visibility.Collapsed;
-                    tboxExtras.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                else
-                {
-                    tbAulas.Visibility = System.Windows.Visibility.Collapsed;
-                    listAulas.Visibility = System.Windows.Visibility.Collapsed;
-                    tbExtras.Visibility = System.Windows.Visibility.Visible;
-                    tboxExtras.Visibility = System.Windows.Visibility.Visible;
-                }
-            }
-            catch
-            {
-            }
         }
 
         private void btSalvar_Click_1(object sender, EventArgs e)
         {
-            string ativ="", dias="";
-            bool aula=true;
-            if (tbAulas.Visibility == System.Windows.Visibility.Visible)
+            string dias="";
+          
+            if (tboxExtras.Text != "")
             {
-                if (listAulas.Items.Count != 0)
-                {
-                    banco_de_dados_local.Model.Historico hist = listAulas.SelectedItem as banco_de_dados_local.Model.Historico;
-                    ativ = hist.Materia;
-                    aula = true;
-                }
-                else
-                {
-                    MessageBox.Show("Não há matérias salvas no quadrimestre para se adicionar à grade");
-                }
-            }
-            else
-            {
-                    ativ = tboxExtras.Text;
-                    aula = false;
-            }
-
-            if (ativ != "")
-            {
-                if (dayPicker.SelectedItems != null && ativ != "")
+                if (dayPicker.SelectedItems != null)
                 {
                     foreach (object a in dayPicker.SelectedItems)
                     {
@@ -104,9 +58,9 @@ namespace UFABC_Power_CR
 
                     }
 
-                    banco_de_dados_local.Model.Grade horario = new banco_de_dados_local.Model.Grade { Nome = ativ, Dias = dias, HoraInicio = horaInicio.ToString("HH:mm"), HoraFim = horaFim.ToString("HH:mm"), Aula = aula };
+                    banco_de_dados_local.Model.Grade horario = new banco_de_dados_local.Model.Grade { Nome = tboxExtras.Text, Dias = dias, HoraInicio = horaInicio.ToString("HH:mm"), HoraFim = horaFim.ToString("HH:mm"), Local = tboxLocal.Text, Aula = false };
                     App.db.Grades.InsertOnSubmit(horario);
-                    if (dias.Contains("Monday"))
+                    /*if (dias.Contains("Monday"))
                     {
                         App.ViewModel.HorariosSeg = novaColecao(horario, App.ViewModel.HorariosSeg);
                     }
@@ -133,7 +87,7 @@ namespace UFABC_Power_CR
                     if (dias.Contains("Sunday"))
                     {
                         App.ViewModel.HorariosDom = novaColecao(horario, App.ViewModel.HorariosDom);
-                    }
+                    }*/
                     if (dias.Contains(DateTime.Today.DayOfWeek.ToString()))
                     {
                         App.ViewModel.HorariosHoje = novaColecao(horario, App.ViewModel.HorariosHoje);
@@ -178,13 +132,13 @@ namespace UFABC_Power_CR
             }
         }
 
-        private System.Collections.ObjectModel.ObservableCollection<banco_de_dados_local.Model.Grade> novaColecao(banco_de_dados_local.Model.Grade horario, System.Collections.ObjectModel.ObservableCollection<banco_de_dados_local.Model.Grade> colecao)
+        private List<banco_de_dados_local.Model.Grade> novaColecao(banco_de_dados_local.Model.Grade horario, List<banco_de_dados_local.Model.Grade> colecao)
         {
             List<banco_de_dados_local.Model.Grade> horarios = new List<banco_de_dados_local.Model.Grade>();
             horarios.AddRange(colecao);
             horarios.Add(horario);
             colecao.Clear();
-            colecao = new System.Collections.ObjectModel.ObservableCollection<banco_de_dados_local.Model.Grade>(horarios.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
+            colecao = new List<banco_de_dados_local.Model.Grade>(horarios.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
             return colecao;
         }
 

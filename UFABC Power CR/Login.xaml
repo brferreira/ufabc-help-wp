@@ -14,7 +14,51 @@
     shell:SystemTray.IsVisible="False"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Loaded="PhoneApplicationPage_Loaded">
     <!--LayoutRoot is the root grid where all page content is placed-->
-    
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+
+            <shell:ApplicationBarIconButton
+                x:Name="btfbLogin" 
+                IconUri="/Imagens/fblogin.png" 
+                Text="login facebook"
+                IsEnabled="True"
+                Click= "btfbLogin_Click"/>
+            
+            <shell:ApplicationBarIconButton
+                x:Name="btLogar" 
+                IconUri="/Imagens/login.png" 
+                Text="login local"
+                IsEnabled="True"
+                Click= "btLogar_Click"/>
+
+            <shell:ApplicationBarIconButton
+                x:Name="btNoticias" 
+                IconUri="/Imagens/rss.png" 
+                Text="notícias"
+                IsEnabled="True"
+                 Click= "itemNoticias_Click"/>
+
+            <shell:ApplicationBarIconButton
+                x:Name="btFretado" 
+                IconUri="/Imagens/bus.png" 
+                Text="fretado"
+                IsEnabled="True"
+                Click= "itemFretado_Click"/>
+
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem
+                    x:Name="itemCadastro"
+                    Text="cadastrar usuário"
+                    Click="itemCadastro_Click"/>
+                
+
+            </shell:ApplicationBar.MenuItems>
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+
     <Grid x:Name="LayoutRoot"  Background="Transparent" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="110"/>
@@ -22,15 +66,11 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel HorizontalAlignment="Left" Height="294" Grid.Row="1" VerticalAlignment="Top" Width="470" Margin="10,27,0,0" >
-            <TextBlock TextWrapping="Wrap" Text="Nome de usuário"/>              
+        <StackPanel HorizontalAlignment="Left" Height="218" Grid.Row="1" VerticalAlignment="Top" Width="470" Margin="10,27,0,0" >
+            <TextBlock TextWrapping="Wrap" Text="nome de usuário"/>
             <toolkit:AutoCompleteBox x:Name="tbNome" Margin="0,0,27,0" IsDropDownOpen="True"/>
-            <TextBlock  TextWrapping="Wrap" Text="Senha" />
-            <PasswordBox x:Name="pbSenha" MaxLength="16" Margin="0,0,27,0" />            
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="147" Margin="0,501,0,0" Grid.Row="1" VerticalAlignment="Top" Width="470">
-            <Button x:Name="btLogin" Content="Login" Click="btLogin_Click" />
-            <Button x:Name="btCadastro" Content="Cadastrar usuário" Click="Button_Click"/>
+            <TextBlock  TextWrapping="Wrap" Text="senha" />
+            <PasswordBox x:Name="pbSenha" MaxLength="16" Margin="0,0,27,0" />
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="100" Margin="10,0,0,0" VerticalAlignment="Top" Width="100" Source="/Imagens/help!.png"/>
         <TextBlock Text="UFABC Help!" HorizontalAlignment="Left" Margin="129,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.384,-0.167" FontSize="56">

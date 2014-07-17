@@ -76,6 +76,46 @@ namespace banco_de_dados_local.Model
                 }
             }
         }
+
+        private string _fbId;
+
+        [Column]
+        public string FbId
+        {
+            get { return _fbId; }
+            set
+            {
+                if (_fbId != value)
+                {
+                    NotifyPropertyChanging("FbId");
+
+                    _fbId = value;
+                    NotifyPropertyChanged("FbId");
+                }
+            }
+        }
+
+        private string _fbToken;
+
+        [Column]
+        public string FbToken
+        {
+            get { return _fbToken; }
+            set
+            {
+                if (_fbToken != value)
+                {
+                    NotifyPropertyChanging("FbToken");
+
+                    _fbToken = value;
+                    NotifyPropertyChanged("FbToken");
+                }
+            }
+        }
+
+      
+
+
         
 
         #region INotifyPropertyChanged Members

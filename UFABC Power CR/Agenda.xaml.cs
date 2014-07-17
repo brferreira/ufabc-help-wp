@@ -20,6 +20,7 @@ namespace UFABC_Power_CR
         {
             InitializeComponent();
 
+            App.ViewModel.loadAgenda();
             this.DataContext = App.ViewModel;
             
         }

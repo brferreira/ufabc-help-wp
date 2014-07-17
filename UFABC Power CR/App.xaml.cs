@@ -15,20 +15,25 @@ using Microsoft.Phone.Shell;
 // Directives
 using banco_de_dados_local.Model;
 using banco_de_dados_local.ViewModel;
+using System.ServiceModel.Syndication;
+
 
 namespace UFABC_Power_CR
 {
     public partial class App : Application
     {
         public bool  edita = false, msg = false;//msg inutil 
-        public static bool fblogin = false;
+        public static bool fblogin = false, login = false, atualizaAtiv = false, fbVinculado;
         public  ToDoItem item;
         public  banco_de_dados_local.Model.Historico Hist;
         public  int quadrimestre, quadriAtual;
         public static ToDoDataContext db;
+        //public static UsuariosDataContext dbUsers;
+        public static int tipo_usuario = 0, uid=0;
         public static Aluno aluno;
         public static string usuario, professor, disciplina;
         public static string id, token;
+        public SyndicationItem sItem;
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.

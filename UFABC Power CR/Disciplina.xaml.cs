@@ -164,7 +164,14 @@ namespace UFABC_Power_CR
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            baixar_info();
+            if (App.fblogin == true)
+            {
+                baixar_info();
+            }
+            else
+            {
+                MessageBox.Show("Você não está logado no sistema do \"UFABC Help!\", faça login no menu principal para poder acessar este conteúdo");
+            }
         }
 
     }

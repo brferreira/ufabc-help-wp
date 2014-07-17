@@ -43,7 +43,25 @@ namespace UFABC_Power_CR
         
         }
 
-        private void btLogin_Click(object sender, RoutedEventArgs e)
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack == true)
+            {
+                NavigationService.RemoveBackEntry();
+            }
+        }
+
+        private void itemNoticias_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Noticias.xaml", UriKind.Relative));
+        }
+
+        private void itemFretado_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Fretado.xaml", UriKind.Relative));
+        }
+
+        private void btLogar_Click(object sender, EventArgs e)
         {
             App.db = new ToDoDataContext("Data Source='isostore:/" + tbNome.Text + ".sdf';Password='" + pbSenha.Password + "'");
 
@@ -57,16 +75,16 @@ namespace UFABC_Power_CR
                     (App.Current as App).quadriAtual = App.aluno.QuadriAtual;
                     // Create the ViewModel object.
 
-                    
+
 
                     App.ViewModel = new banco_de_dados_local.ViewModel.ToDoViewModel();
                     // Query the local database and load observable collections.
                     App.ViewModel.LoadCollectionsFromDatabase();
 
-                    
+                    App.login = true;
                     NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                 }
-                catch 
+                catch
                 {
                     MessageBox.Show("A senha está incorreta");
                     pbSenha.Password = "";
@@ -78,19 +96,22 @@ namespace UFABC_Power_CR
                 tbNome.Text = "";
                 pbSenha.Password = "";
             }
-
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void itemCadastro_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/Inicio.xaml", UriKind.Relative));
         }
 
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        private void btfbLogin_Click(object sender, EventArgs e)
         {
-            if (NavigationService.CanGoBack == true)
+            if (Microsoft.Phone.Net.NetworkInformation.NetworkInterface.NetworkInterfaceType != Microsoft.Phone.Net.NetworkInformation.NetworkInterfaceType.None)
             {
-                NavigationService.RemoveBackEntry();
+                NavigationService.Navigate(new Uri("/FacebookLogin.xaml", UriKind.Relative));
+            }
+            else
+            {
+                MessageBox.Show("Não é possível fazer login por facebook, pois não há conexão com a internet. Tente novamente ou faça login local");
             }
         }
 

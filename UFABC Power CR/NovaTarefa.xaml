@@ -26,10 +26,11 @@
 
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="UFABC HELP!" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="nova tarefa" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"  Foreground="#FF009A22"/> 
+
         </StackPanel>
-        <ScrollViewer Margin="0,80,0,-396" Grid.RowSpan="2" >
-            <StackPanel x:Name="ContentPanel"  Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1120">
-                <TextBlock Text="Nova Tarefa" FontSize="{StaticResource PhoneFontSizeLarge}" HorizontalAlignment="Center" Margin="0,0,0,0" Foreground="#FF009A22"/>
+        <ScrollViewer Margin="0,160,0,-396" Grid.RowSpan="2" >
+            <StackPanel x:Name="ContentPanel"  Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1120" Width="456">
                 <TextBlock Text="Nome"/>
                 <TextBox x:Name="newTaskNameTextBox" MaxLength="40" />
 

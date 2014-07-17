@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using banco_de_dados_local.Model;
+using Newtonsoft.Json;
 
 
 namespace UFABC_Power_CR
@@ -16,10 +17,12 @@ namespace UFABC_Power_CR
     {
         List<banco_de_dados_local.Model.Materia> materias;
         List<string> nomes;
+        ProgressIndicator prog;
         public addMateria()
         {
             InitializeComponent();
             materias = App.db.Materias.ToList();
+            App.ViewModel.loadMateriasQuad();
             List<string> profsNomes = new List<string>();
             List<banco_de_dados_local.Model.Professor> profs = App.db.Professores.ToList();
             foreach (banco_de_dados_local.Model.Professor prof in profs)
@@ -173,18 +176,65 @@ namespace UFABC_Power_CR
         }
 
 
+        private void baixar_info(int id)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                wc.DownloadStringAsync(
+                   new Uri("http://www.ufabchelp.me/painel/servicos/disciplina.php?id=" + id.ToString()));
+                SystemTray.SetIsVisible(this, true);
+                SystemTray.SetOpacity(this, 0);
+                prog = new ProgressIndicator();
+                prog.IsVisible = true;
+                prog.Text = "baixando informações";
+                prog.IsIndeterminate = true;
+                SystemTray.SetProgressIndicator(this, prog);
+                wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+
+        void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result != null)
+                {
+                    disciplina disc = JsonConvert.DeserializeObject<disciplina>(e.Result);
+                    tboxCreditos.Text = (disc.T + disc.P).ToString();
+                    tboxCreditos.IsEnabled = false;
+                }
+                prog.IsVisible = false;
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show(erro.Message);
+                prog.IsVisible = false;
+            }
+        }
 
         private void tboxMateria_TextChanged(object sender, RoutedEventArgs e)
         {
             if ((App.Current as App).edita == false)
             {
+                tboxCreditos.IsEnabled = true;
                 if (nomes.Contains(tboxMateria.Text))
                 {
-                    banco_de_dados_local.Model.Materia mat = materias.Single(m => m.Nome == tboxMateria.Text);
+                    if (Microsoft.Phone.Net.NetworkInformation.NetworkInterface.NetworkInterfaceType != Microsoft.Phone.Net.NetworkInformation.NetworkInterfaceType.None)
+                    {
+                        banco_de_dados_local.Model.Materia mat = materias.Single(m => m.Nome == tboxMateria.Text);
+                        baixar_info(mat.HelpId);
+                    }
+                    /*banco_de_dados_local.Model.Materia mat = materias.Single(m => m.Nome == tboxMateria.Text);
                     if (mat.Teoria != 0)
                     {
                         tboxCreditos.Text = (mat.Teoria + mat.Pratica).ToString();
-                    }
+                    }*/
                 }
                 else
                 {

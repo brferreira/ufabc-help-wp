@@ -78,39 +78,32 @@
 
 
         <DataTemplate x:Key="horaTemplate">
-            <Grid HorizontalAlignment="Stretch" Width="420">
-
-
-
-                <TextBlock x:Name="tbHoraInicio"                            
-                    Text="{Binding HoraInicio}" 
-                           Margin="0,25,0,0"
-                    VerticalAlignment="Top" 
-                           FontSize="25"
-                    TextWrapping="NoWrap"/>
-
-                <TextBlock                            
-                    Text=" - " 
-                           Margin="55,25,0,0"
-                    VerticalAlignment="Top" 
-                    FontSize="25"
-                    TextWrapping="NoWrap"/>
-
-                <TextBlock x:Name="tbHoraFim"                            
-                    Text="{Binding HoraFim}" 
-                           Margin="80,25,0,0"
-                           FontSize="25"
-                    VerticalAlignment="Top" 
-                           
-                    TextWrapping="NoWrap"/>
-
-                <TextBlock x:Name="tbNome"                            
+            <StackPanel Margin="0,15,0,0">
+                <TextBlock x:Name="tbNome"   
                     Text="{Binding Nome}" 
-                           Margin="0,55,0,0"
                     VerticalAlignment="Top" 
                            FontSize="25"
                     TextWrapping="Wrap"/>
-            </Grid>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="tbHoraInicio"                            
+                    Text="{Binding HoraInicio}" 
+                    VerticalAlignment="Top" 
+                           FontSize="25"
+                    TextWrapping="Wrap"/>
+                    <TextBlock                            
+                    Text=" - " 
+                    VerticalAlignment="Top" 
+                    FontSize="25"
+                    TextWrapping="Wrap"/>
+                    <TextBlock x:Name="tbHoraFim"                            
+                    Text="{Binding HoraFim}" 
+                           FontSize="25"
+                    VerticalAlignment="Top" 
+                    TextWrapping="Wrap"/>
+                </StackPanel>
+                <TextBlock Text="{Binding Local}" FontSize="25" TextWrapping="Wrap"/>
+            </StackPanel>
         </DataTemplate>
 
 
@@ -171,7 +164,7 @@
                          HorizontalAlignment="Left" 
                          Height="385" Margin="10,0,0,0" 
                          VerticalAlignment="Top" Width="400"
-                         ItemsSource="{Binding HorariosHoje}"
+                         ItemsSource="{Binding }"
                          ItemTemplate="{StaticResource horaTemplate}"/>
 
 
@@ -189,19 +182,10 @@
                 <TextBlock x:Name="tbProf" FontSize="32" Text="professores" Height="60" Tap="tbProf_Tap" Foreground="{StaticResource PhoneForegroundBrush}" toolkit:TiltEffect.IsTiltEnabled ="True"/>
                 <TextBlock x:Name="tbDisciplinas" FontSize="32" Text="disciplinas" Height="60" Tap="tbDisciplinas_Tap" Foreground="{StaticResource PhoneForegroundBrush}" toolkit:TiltEffect.IsTiltEnabled ="True"/>
                 <TextBlock  x:Name="tbNoticias" FontSize="32" Text="notícias" Height="60" Foreground="{StaticResource PhoneForegroundBrush}" toolkit:TiltEffect.SuppressTilt ="False" toolkit:TiltEffect.IsTiltEnabled="True" IsHitTestVisible="True" Tap="tbNoticias_Tap" />
+                <TextBlock x:Name="tbOnibus" FontSize="32" Text="fretado" Height="60" Foreground="{StaticResource PhoneForegroundBrush}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="tbOnibus_Tap"/>
+                <TextBlock x:Name="tbLinks" FontSize="32" Text="links" Height="60" Foreground="{StaticResource PhoneForegroundBrush}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="tbLinks_Tap"/>
             </StackPanel>
 
-
-        </controls:PanoramaItem>
-        <controls:PanoramaItem Header="links" Foreground="#FF009A22" Height="505">
-            <StackPanel HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="420">
-                <TextBlock x:Name="tbHome" Text="homepage UFABC" FontSize="32" Height="55" Tap="tbHome_Tap" Foreground="{StaticResource PhoneForegroundBrush}"/>
-                <TextBlock x:Name="tbPro" Text="prograd" FontSize="32" Height="55" Tap="tbPro_Tap" Foreground="{StaticResource PhoneForegroundBrush}"/>
-                <TextBlock x:Name="tbBiblio" Text="biblioteca" FontSize="32" Height="55" Tap="tbBiblio_Tap" Foreground="{StaticResource PhoneForegroundBrush}"/>
-                <TextBlock x:Name="tbEntid" Text="entidades estudantis" FontSize="32" Height="55" Tap="tbEntid_Tap" Foreground="{StaticResource PhoneForegroundBrush}"/>
-                <TextBlock x:Name="tbTransp" Text="transporte universitário" FontSize="32" Height="55" Tap="tbTransp_Tap" Foreground="{StaticResource PhoneForegroundBrush}"/>
-                <TextBlock x:Name="tbRU" Text="cardápio RU" FontSize="32" Height="55" Tap="tbRU_Tap" Foreground="{StaticResource PhoneForegroundBrush}" />
-            </StackPanel>
 
         </controls:PanoramaItem>
     </controls:Panorama>

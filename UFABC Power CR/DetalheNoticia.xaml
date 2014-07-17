@@ -14,6 +14,25 @@
     shell:SystemTray.IsVisible="True"
     Loaded="PhoneApplicationPage_Loaded">
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+
+
+            <shell:ApplicationBarIconButton 
+                x:Name="btSMS" 
+                IconUri="/Imagens/message.png" 
+                Text="enviar por sms" 
+                Click="btSMS_Click"
+               />
+
+            <shell:ApplicationBarIconButton
+                IconUri="/Imagens/feature.email.png"
+                Text="enviar por e-mail"
+                x:Name="btEmail"
+                Click="btEmail_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -22,9 +41,11 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="UFABC HELP" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="sem titulo" TextWrapping="Wrap" x:Name="newsTitle" Margin="9,-7,0,5" Style="{StaticResource PhoneTextTitle2Style}"/>
+        <StackPanel Grid.Row="0" Margin="12,6,0,39">
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
+            	<Run Text="UFABC HELP!"/>
+            </TextBlock>
+            <TextBlock Foreground="#FF009A22" Text="sem titulo" TextWrapping="Wrap" x:Name="newsTitle" Margin="9,20,0,5" Style="{StaticResource PhoneTextTitle2Style}"/>
             <TextBlock Text="por fulano, ontem, às 19:00" x:Name="newsAuthorDate" Style="{StaticResource PhoneTextSmallStyle}"/>
         </StackPanel>
 
@@ -33,6 +54,7 @@
             <ListBoxItem>
                 <TextBlock TextWrapping="Wrap" Text="Teste texto" x:Name="newsContent" Style="{StaticResource PhoneTextNormalStyle}" />
             </ListBoxItem>
+            <TextBlock TextWrapping="Wrap" Text="" x:Name="link" Style="{StaticResource PhoneTextNormalStyle}" Tap="link_Tap" />
         </ListBox>
     </Grid>
 

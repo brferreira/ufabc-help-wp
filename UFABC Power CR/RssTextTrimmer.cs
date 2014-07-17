@@ -13,7 +13,7 @@ namespace sdkRSSReaderCS
         {
             if (value == null) return null;
 
-            int maxLength = 200;
+            int maxLength = 55;
             int strLength = 0;
             string fixedString = "";
 

@@ -231,21 +231,28 @@ namespace UFABC_Power_CR
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (id != 0)
+            if (App.fblogin == true)
             {
-                if (Microsoft.Phone.Net.NetworkInformation.NetworkInterface.NetworkInterfaceType != Microsoft.Phone.Net.NetworkInformation.NetworkInterfaceType.None)
+                if (id != 0)
                 {
-                    baixar_info();
-                    baixar_comentarios();
+                    if (Microsoft.Phone.Net.NetworkInformation.NetworkInterface.NetworkInterfaceType != Microsoft.Phone.Net.NetworkInformation.NetworkInterfaceType.None)
+                    {
+                        baixar_info();
+                        baixar_comentarios();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Não é possível obter informações sobre o professor, pois ele não está cadastrado no banco de dados do UFABC Help!");
+                    ApplicationBarMenuItem editar = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
+                    ApplicationBarMenuItem excluir = (ApplicationBarMenuItem)ApplicationBar.MenuItems[1];
+                    editar.IsEnabled = true;
+                    excluir.IsEnabled = true;
                 }
             }
             else
             {
-                MessageBox.Show("Não é possível obter informações sobre o professor, pois ele não está cadastrado no banco de dados do UFABC Help!");
-                ApplicationBarMenuItem editar = (ApplicationBarMenuItem)ApplicationBar.MenuItems[0];
-                ApplicationBarMenuItem excluir = (ApplicationBarMenuItem)ApplicationBar.MenuItems[1];
-                editar.IsEnabled = true;
-                excluir.IsEnabled = true;
+                MessageBox.Show("Você não está logado ao sistema do \"UFABC Help!\", faça login no facebook no menu principal para acessar este conteúdo");
             }
         }
 

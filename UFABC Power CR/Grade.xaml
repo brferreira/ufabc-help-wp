@@ -42,44 +42,41 @@
     <phone:PhoneApplicationPage.Resources>
 
         <DataTemplate x:Key="horaTemplate">
-            <Grid HorizontalAlignment="Stretch" Width="420" >
-
-
-                <CheckBox 
+            
+            <StackPanel Margin="0,20,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox 
                  VerticalAlignment="Top"
                     Checked="CheckBox_Checked_1"
                     Unchecked="CheckBox_Unchecked_1"/>
-
-
-                <TextBlock x:Name="tbHoraInicio"                            
-                    Text="{Binding HoraInicio}" 
-                           Margin="60,25,0,0"
+                    <TextBlock x:Name="tbNome"   
+                               Margin="0,20,0,0"
+                    Text="{Binding Nome}" 
                     VerticalAlignment="Top" 
                            FontSize="25"
                     TextWrapping="Wrap"/>
-
-                <TextBlock                            
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="70,-20,0,0">
+                    <TextBlock x:Name="tbHoraInicio"                            
+                    Text="{Binding HoraInicio}" 
+                    VerticalAlignment="Top" 
+                           FontSize="25"
+                    TextWrapping="Wrap"/>
+                    <TextBlock                            
                     Text=" - " 
-                           Margin="115,25,0,0"
                     VerticalAlignment="Top" 
                     FontSize="25"
                     TextWrapping="Wrap"/>
-
-                <TextBlock x:Name="tbHoraFim"                            
+                    <TextBlock x:Name="tbHoraFim"                            
                     Text="{Binding HoraFim}" 
-                           Margin="140,25,0,0"
                            FontSize="25"
                     VerticalAlignment="Top" 
-                           
                     TextWrapping="Wrap"/>
-
-                <TextBlock x:Name="tbNome"                            
-                    Text="{Binding Nome}" 
-                           Margin="60,55,0,0"
-                    VerticalAlignment="Top" 
-                           FontSize="25"
-                    TextWrapping="Wrap"/>
-            </Grid>
+                </StackPanel>
+                <TextBlock Margin="70,0,0,0" Text="{Binding Local}" FontSize="25" TextWrapping="Wrap"/>
+            </StackPanel>
+            
+   
         </DataTemplate>
 
     </phone:PhoneApplicationPage.Resources>
@@ -104,7 +101,7 @@
                 <ListBox x:Name="listSeg" 
                          HorizontalAlignment="Left" Height="535"
                          VerticalAlignment="Top" Width="456"
-                         ItemsSource="{Binding HorariosSeg}"
+                         ItemsSource="{Binding }"
                          ItemTemplate="{StaticResource horaTemplate}"/>
             </controls:PivotItem>
 
@@ -113,7 +110,7 @@
                 <ListBox x:Name="listTer"
                          HorizontalAlignment="Left" Height="535" 
                          VerticalAlignment="Top" Width="456"
-                         ItemsSource="{Binding HorariosTer}"
+                         ItemsSource="{Binding }"
                          ItemTemplate="{StaticResource horaTemplate}"/>
             </controls:PivotItem>
 
@@ -121,7 +118,7 @@
                 <ListBox x:Name="listQua" 
                          HorizontalAlignment="Left" Height="535" 
                          VerticalAlignment="Top" Width="456"
-                         ItemsSource="{Binding HorariosQua}"
+                         ItemsSource="{Binding }"
                          ItemTemplate="{StaticResource horaTemplate}"/>
             </controls:PivotItem>
 
@@ -129,7 +126,7 @@
                 <ListBox x:Name="listQui" 
                          HorizontalAlignment="Left" Height="535"
                          VerticalAlignment="Top" Width="456"
-                         ItemsSource="{Binding HorariosQui}"
+                         ItemsSource="{Binding }"
                          ItemTemplate="{StaticResource horaTemplate}"/>
                 
             </controls:PivotItem>
@@ -138,7 +135,7 @@
                 <ListBox x:Name="listSex"
                          HorizontalAlignment="Left" Height="535"
                          VerticalAlignment="Top" Width="456"
-                         ItemsSource="{Binding HorariosSex}"
+                         ItemsSource="{Binding }"
                          ItemTemplate="{StaticResource horaTemplate}"/>
             </controls:PivotItem>
 
@@ -146,7 +143,7 @@
                 <ListBox x:Name="listSab"
                          HorizontalAlignment="Left" Height="535"
                          VerticalAlignment="Top" Width="456"
-                         ItemsSource="{Binding HorariosSab}"
+                         ItemsSource="{Binding }"
                          ItemTemplate="{StaticResource horaTemplate}"/>
             </controls:PivotItem>
 
@@ -154,7 +151,7 @@
                 <ListBox x:Name="listDom"
                          HorizontalAlignment="Left" Height="535"
                          VerticalAlignment="Top" Width="456"
-                         ItemsSource="{Binding HorariosDom}"
+                         ItemsSource="{Binding }"
                          ItemTemplate="{StaticResource horaTemplate}"/>
             </controls:PivotItem>
 

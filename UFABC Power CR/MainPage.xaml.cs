@@ -14,7 +14,7 @@ using banco_de_dados_local.Model;
 
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Shell;
-
+using Facebook.Client;
 
 
 namespace UFABC_Power_CR
@@ -25,7 +25,7 @@ namespace UFABC_Power_CR
         {
 
             InitializeComponent();
-
+            listAtiv.ItemsSource = App.ViewModel.HorariosHoje.OrderBy(x => System.DateTime.Parse(x.HoraInicio));
             //MVC - relaciona o DataContext da classe com o objeto viewModel da classe ViewModel 
             this.DataContext = App.ViewModel;
         }
@@ -140,7 +140,7 @@ namespace UFABC_Power_CR
         //método chamado quando a página carrega
         private void PhoneApplicationPage_Loaded_1(object sender, RoutedEventArgs e)
         {
-           
+
             //FAÇADE -> imprime o CR e CA nos textblocks da pag inicial. O cálculo dos coeficientes é feito na classe CR
             banco_de_dados_local.ViewModel.ToDoViewModel a = new banco_de_dados_local.ViewModel.ToDoViewModel();
             tbCR.Text = "CR: " + App.aluno.CR;
@@ -148,9 +148,16 @@ namespace UFABC_Power_CR
 
             //FAÇADE -> imprime o CP e análise dos coeficientes. O código está nas classes CP e Analise
             tbCP.Text = "CP: " + App.aluno.CP;
-           
+
             //Se o aplicativo pode retornar, apaga a ultima pagina visitada do registro. Isso garante que ao clicar no botão voltar
             // o usuário saia do programa
+
+            if (App.fblogin == true)
+            {
+                ApplicationBarMenuItem item = (ApplicationBarMenuItem)ApplicationBar.MenuItems[1];
+                item.IsEnabled = false;
+            }
+
             if (NavigationService.CanGoBack == true)
             {
                 NavigationService.RemoveBackEntry();
@@ -158,8 +165,15 @@ namespace UFABC_Power_CR
             if (App.fblogin == true)
             {
             }
+            if (App.atualizaAtiv == true)
+            {
+                App.atualizaAtiv = false;
+                App.ViewModel.loadAtivHoje();
+                listAtiv.ItemsSource = App.ViewModel.HorariosHoje.OrderBy(x => System.DateTime.Parse(x.HoraInicio));
+            }
 
         }
+
 
         private void panoramaX_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -238,59 +252,33 @@ namespace UFABC_Power_CR
             a.Show();
         }
 
-        private void tbHome_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://www.ufabc.edu.br/", UriKind.Absolute);
-            wbt.Show();
-        }
-
-        private void tbPro_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://prograd.ufabc.edu.br/", UriKind.Absolute);
-            wbt.Show();
-        }
-
-        private void tbBiblio_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://biblioteca.ufabc.edu.br/", UriKind.Absolute);
-            wbt.Show();
-        }
-
-        private void tbTransp_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://pu.ufabc.edu.br/transporte", UriKind.Absolute);
-            wbt.Show();
-        }
-
-        private void tbRU_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            WebBrowserTask wbt = new WebBrowserTask();
-            wbt.Uri = new Uri("http://proap.ufabc.edu.br/images/PDF/Cardapio.pdf", UriKind.Absolute);
-            wbt.Show();
-        }
-
-        private void tbEntid_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/entidades.xaml", UriKind.Relative));
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void tbProf_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Professores.xaml", UriKind.Relative));
+                if (App.db.Aluno.First().Tipo_Usuario == 1)
+                {
+                    NavigationService.Navigate(new Uri("/Professores.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    MessageBox.Show("Você não tem permissão para acessar este conteúdo!");
+                }
         }
 
         private void tbDisciplinas_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Disciplinas.xaml", UriKind.Relative));
+            if (App.db.Aluno.First().Tipo_Usuario == 1)
+            {
+                NavigationService.Navigate(new Uri("/Disciplinas.xaml", UriKind.Relative));
+            }
+            else
+            {
+                MessageBox.Show("Você não tem permissão para acessar este conteúdo!");
+            }
         }
 
         private void tbNoticias_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -300,62 +288,76 @@ namespace UFABC_Power_CR
 
         private void fb_login_Click(object sender, EventArgs e)
         {
-            if (App.fblogin == false)
+            if (Microsoft.Phone.Net.NetworkInformation.NetworkInterface.NetworkInterfaceType != Microsoft.Phone.Net.NetworkInformation.NetworkInterfaceType.None)
             {
                 NavigationService.Navigate(new Uri("/FacebookLogin.xaml", UriKind.Relative));
             }
-        }
-
-       
-      /*  private void email_Click(object sender, RoutedEventArgs e)
-        {                  
-            var selectedListBoxItem = feedListBox.ItemContainerGenerator.ContainerFromItem(((MenuItem) sender).DataContext) as ListBoxItem;
-            EmailComposeTask email = new EmailComposeTask();
-            SyndicationItem sItem = (SyndicationItem)selectedListBoxItem.Content;
-            email.Body = sItem.Summary.Text.Remove(0, 31) +"\n\n" + sItem.Links.FirstOrDefault().Uri;
-            email.Subject = sItem.Title.Text;
-            email.Show();
-        }
-
-        private void feedListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-            ListBox listBox = sender as ListBox;
-
-            if (listBox != null && listBox.SelectedItem != null)
+            else
             {
-                //itemLista = listBox.SelectedIndex;
-                //pega o SyndicationItem do item que foi pressionado
-                SyndicationItem sItem = (SyndicationItem)listBox.SelectedItem;
-
-                //configura a página de navegação somente se um link realmente existe no item do feed
-                if (sItem.Links.Count > 0)
-                {
-                    //pega o endereço associado ao item do feed
-                    Uri uri = sItem.Links.FirstOrDefault().Uri;
-
-
-                    //cria uma tarefa do browser para navegar para o item do feed
-                    WebBrowserTask webBrowserTask = new WebBrowserTask();
-                    webBrowserTask.Uri = uri;
-                    webBrowserTask.Show();
-                }
+                MessageBox.Show("Não é possível fazer login por facebook, pois não há conexão com a internet. Tente novamente ou faça login local");
             }
         }
 
-        private void sms_Click(object sender, RoutedEventArgs e)
+        private void tbOnibus_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var selectedListBoxItem = feedListBox.ItemContainerGenerator.ContainerFromItem(((MenuItem)sender).DataContext) as ListBoxItem;
-            SmsComposeTask sms = new SmsComposeTask();
-            SyndicationItem sItem = (SyndicationItem)selectedListBoxItem.Content;
-            sms.Body = sItem.Title.Text + "\n\n" + sItem.Links.FirstOrDefault().Uri.ToString().Remove(73);
-            sms.Show();
-        }*/
+            NavigationService.Navigate(new Uri("/Fretado.xaml", UriKind.Relative));
+        }
 
-       
+        private void tbLinks_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Links.xaml", UriKind.Relative));
+        }
 
-       
 
-       
+        /*  private void email_Click(object sender, RoutedEventArgs e)
+          {                  
+              var selectedListBoxItem = feedListBox.ItemContainerGenerator.ContainerFromItem(((MenuItem) sender).DataContext) as ListBoxItem;
+              EmailComposeTask email = new EmailComposeTask();
+              SyndicationItem sItem = (SyndicationItem)selectedListBoxItem.Content;
+              email.Body = sItem.Summary.Text.Remove(0, 31) +"\n\n" + sItem.Links.FirstOrDefault().Uri;
+              email.Subject = sItem.Title.Text;
+              email.Show();
+          }
+
+          private void feedListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+          {
+              ListBox listBox = sender as ListBox;
+
+              if (listBox != null && listBox.SelectedItem != null)
+              {
+                  //itemLista = listBox.SelectedIndex;
+                  //pega o SyndicationItem do item que foi pressionado
+                  SyndicationItem sItem = (SyndicationItem)listBox.SelectedItem;
+
+                  //configura a página de navegação somente se um link realmente existe no item do feed
+                  if (sItem.Links.Count > 0)
+                  {
+                      //pega o endereço associado ao item do feed
+                      Uri uri = sItem.Links.FirstOrDefault().Uri;
+
+
+                      //cria uma tarefa do browser para navegar para o item do feed
+                      WebBrowserTask webBrowserTask = new WebBrowserTask();
+                      webBrowserTask.Uri = uri;
+                      webBrowserTask.Show();
+                  }
+              }
+          }
+
+          private void sms_Click(object sender, RoutedEventArgs e)
+          {
+              var selectedListBoxItem = feedListBox.ItemContainerGenerator.ContainerFromItem(((MenuItem)sender).DataContext) as ListBoxItem;
+              SmsComposeTask sms = new SmsComposeTask();
+              SyndicationItem sItem = (SyndicationItem)selectedListBoxItem.Content;
+              sms.Body = sItem.Title.Text + "\n\n" + sItem.Links.FirstOrDefault().Uri.ToString().Remove(73);
+              sms.Show();
+          }*/
+
+
+
+
+
+
 
     }
 }

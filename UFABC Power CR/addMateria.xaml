@@ -46,11 +46,11 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="UFABC HELP!" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="tbTitulo" Text="nova disciplina cursada"  Margin="9,5,0,0" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Foreground="#FF009A22"/>
         </StackPanel>
-        <ScrollViewer Margin="0,80,0,-396" Grid.RowSpan="2" >
+        <ScrollViewer Margin="0,123,0,-396" Grid.RowSpan="2" >
             <!--ContentPanel - place additional content here-->
-            <StackPanel x:Name="ContentPanel" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1057">
-                <TextBlock x:Name="tbTitulo" Text="nova disciplina cursada" HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeLarge}" Margin="0,0,0,0"/>
+            <StackPanel x:Name="ContentPanel" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1057" Width="470">
                 <TextBlock Text="Nome"/>
                 <toolkit:AutoCompleteBox x:Name="tboxMateria" TextChanged="tboxMateria_TextChanged" FilterMode="Contains"/>
                 <TextBlock Text="Tipo" />

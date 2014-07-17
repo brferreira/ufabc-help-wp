@@ -41,12 +41,12 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="UFABC HELP!" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="tbTitulo" Text="editar professor"  Margin="9,5,0,0" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Foreground="#FF009A22"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <ScrollViewer Margin="0,80,0,-396" Grid.RowSpan="2" >
-            <StackPanel x:Name="ContentPanel" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1057">
-                <TextBlock Text="Editar Professor" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+        <ScrollViewer Margin="0,135,0,-396" Grid.RowSpan="2" >
+            <StackPanel x:Name="ContentPanel" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1057" Width="458">
                 <TextBlock Text="Nome"/>
                 <TextBox x:Name="tbNome" InputScope="PersonalFullName"/>
                 <TextBlock Text="Centro" />

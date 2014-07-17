@@ -66,42 +66,17 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="UFABC HELP!" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="nova atividade" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Foreground="#FF009A22"/>
         </StackPanel>
         
         <!--ContentPanel - place additional content here-->
         <!--Grid x:Name="ContentPanel" Margin="10,17,14,-336" Grid.RowSpan="12">-->
-        <ScrollViewer Margin="0,80,0,-396" Grid.RowSpan="2" >
-            <StackPanel  Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1000">
-                <TextBlock Text="Nova Atividade" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="#FF009A22"/>
-                <TextBlock Text="Tipo" />
-                <toolkit:ListPicker x:Name="listTipo"   SelectionChanged="listTipo_SelectionChanged">
-                    <ListBoxItem Content="Aula"/>
-                    <ListBoxItem Content="Extra-curricular"/>
-                </toolkit:ListPicker>
-                <TextBlock x:Name="tbAulas" Visibility="Collapsed" Text="Aulas" ></TextBlock>
-                <toolkit:ListPicker  FullModeHeader="Selecione a aula" Visibility="Collapsed" x:Name="listAulas" 
-                                
-                                ItemsSource="{Binding MateriasNoQuad}"
-                                ItemTemplate="{StaticResource itemsTemplate}" ExpansionMode="FullScreenOnly" Margin="12">
-                    <toolkit:ListPicker.FullModeItemTemplate>
-                        <DataTemplate>
-
-                            <Grid HorizontalAlignment="Stretch" Width="420">
-                                
-
-                                <TextBlock x:Name="tbItem"      
-                       
-                    Text="{Binding Materia}"  
-                    FontSize="{StaticResource PhoneFontSizeLarge}"
-                    Grid.Column="0" Grid.ColumnSpan="100" 
-                     Margin="0, 0, 0, 0"
-                            TextWrapping="Wrap"/>
-                            </Grid>
-                        </DataTemplate>
-                    </toolkit:ListPicker.FullModeItemTemplate>
-                </toolkit:ListPicker>
-                <TextBlock Visibility="Collapsed" x:Name="tbExtras"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Nome da Atividade" VerticalAlignment="Top"/>
-                <TextBox x:Name="tboxExtras" Visibility="Collapsed" HorizontalAlignment="Left" Height="72" Width="660"  InputScope="Text"/>
+        <ScrollViewer Margin="0,160,0,-396" Grid.RowSpan="2" >
+            <StackPanel  Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1120" Width="456">
+                <TextBlock x:Name="tbExtras"  HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Nome da Atividade" VerticalAlignment="Top"/>
+                <TextBox x:Name="tboxExtras"  HorizontalAlignment="Left" Height="72" Width="660"  InputScope="Text"/>
+                <TextBlock Text="Local"/>
+                <TextBox x:Name="tboxLocal"  HorizontalAlignment="Left" Height="72" Width="660"  InputScope="Text"/>
                 <TextBlock Text="Horário" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.03,0.148"/>
                 <toolkit:TimePicker x:Name="tpHoraInicio" Header="Inicio"  ValueChanged="tpHoraInicio_ValueChanged"/>
                 <toolkit:TimePicker Header="Fim" x:Name="tpHoraFim"  ValueChanged="tpHoraFim_ValueChanged"/>

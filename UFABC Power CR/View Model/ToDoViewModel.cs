@@ -124,8 +124,8 @@ namespace banco_de_dados_local.ViewModel
 
 
         // horários hoje.
-        private ObservableCollection<Grade> _horariosHoje;
-        public ObservableCollection<Grade> HorariosHoje
+        private List<Grade> _horariosHoje;
+        public List<Grade> HorariosHoje
         {
             get { return _horariosHoje; }
             set
@@ -135,93 +135,7 @@ namespace banco_de_dados_local.ViewModel
             }
         }
 
-        // horários segunda.
-        private ObservableCollection<Grade> _horariosSeg;
-        public ObservableCollection<Grade> HorariosSeg
-        {
-            get { return _horariosSeg; }
-            set
-            {
-                _horariosSeg = value;
-                NotifyPropertyChanged("HorariosSeg");
-            }
-        }
-
-
-        // horários Terça.
-        private ObservableCollection<Grade> _horariosTer;
-        public ObservableCollection<Grade> HorariosTer
-        {
-            get { return _horariosTer; }
-            set
-            {
-                _horariosTer = value;
-                NotifyPropertyChanged("HorariosTer");
-            }
-        }
-
-
-        // horários Quarta.
-        private ObservableCollection<Grade> _horariosQua;
-        public ObservableCollection<Grade> HorariosQua
-        {
-            get { return _horariosQua; }
-            set
-            {
-                _horariosQua = value;
-                NotifyPropertyChanged("HorariosQua");
-            }
-        }
-
-        // horários Quinta.
-        private ObservableCollection<Grade> _horariosQui;
-        public ObservableCollection<Grade> HorariosQui
-        {
-            get { return _horariosQui; }
-            set
-            {
-                _horariosQui = value;
-                NotifyPropertyChanged("HorariosQui");
-            }
-        }
-
-        // horários Sexta.
-        private ObservableCollection<Grade> _horariosSex;
-        public ObservableCollection<Grade> HorariosSex
-        {
-            get { return _horariosSex; }
-            set
-            {
-                _horariosSex = value;
-                NotifyPropertyChanged("HorariosSex");
-            }
-        }
-
-
-        // horários Sabado.
-        private ObservableCollection<Grade> _horariosSab;
-        public ObservableCollection<Grade> HorariosSab
-        {
-            get { return _horariosSab; }
-            set
-            {
-                _horariosSab = value;
-                NotifyPropertyChanged("HorariosSab");
-            }
-        }
-
-
-        // horários Domingo.
-        private ObservableCollection<Grade> _horariosDom;
-        public ObservableCollection<Grade> HorariosDom
-        {
-            get { return _horariosDom; }
-            set
-            {
-                _horariosDom = value;
-                NotifyPropertyChanged("HorariosDom");
-            }
-        }
+       
 
         // A list of all categories, used by the add task page.
         private List<ToDoCategory> _categoriesList;
@@ -236,76 +150,14 @@ namespace banco_de_dados_local.ViewModel
         }
 
 
-
-
-
-
-        // Query database and load the collections and list used by the pivot pages.
-        public void LoadCollectionsFromDatabase()
+        public void loadAgenda()
         {
-
-            //query para items hoje
-            var itemsHojeInDB = from ToDoItem todo in UFABC_Power_CR.App.db.Items where todo.ItemData.Equals(System.DateTime.Now.ToShortDateString()) ||
-                                todo.ItemData.Equals(System.DateTime.Now.AddDays(1).ToShortDateString()) ||
-                                todo.ItemData.Equals(System.DateTime.Now.AddDays(2).ToShortDateString()) ||
-                                todo.ItemData.Equals(System.DateTime.Now.AddDays(3).ToShortDateString()) ||
-                                todo.ItemData.Equals(System.DateTime.Now.AddDays(4).ToShortDateString()) ||
-                                todo.ItemData.Equals(System.DateTime.Now.AddDays(5).ToShortDateString()) ||
-                                todo.ItemData.Equals(System.DateTime.Now.AddDays(6).ToShortDateString()) ||
-                                todo.ItemData.Equals(System.DateTime.Now.AddDays(7).ToShortDateString())
-                                select todo;
-
             // Specify the query for all to-do items in the database.
-            var toDoItemsInDB = from ToDoItem todo in UFABC_Power_CR.App.db.Items
-                                select todo;
-
-
-            //matérias quadri
-            var AlunoInDb = from Aluno aluno in UFABC_Power_CR.App.db.Aluno select aluno;
-            foreach(Aluno aluno in AlunoInDb)
-            {
-                var materiaQuadInDB = from Historico hist in UFABC_Power_CR.App.db.Historicos where hist.Quadrimestre == aluno.QuadriAtual select hist;
-                MateriasNoQuad = new ObservableCollection<Historico>(materiaQuadInDB);
-
-            }
-
-            //horários de hoje
-            var horaHojeInDb = from Grade horarios in UFABC_Power_CR.App.db.Grades where horarios.Dias.Contains(System.DateTime.Now.DayOfWeek.ToString()) select horarios;
-            //seleciona horarios que contem segunda
-            var horaSegInDb = from Grade horarios in UFABC_Power_CR.App.db.Grades where horarios.Dias.Contains("Monday") select horarios;
-            //terça
-            var horaTerInDb = from Grade horarios in UFABC_Power_CR.App.db.Grades where horarios.Dias.Contains("Tuesday") select horarios;
-            //quarta
-            var horaQuaInDb = from Grade horarios in UFABC_Power_CR.App.db.Grades where horarios.Dias.Contains("Wednesday") select horarios;
-            //quinta
-            var horaQuiInDb = from Grade horarios in UFABC_Power_CR.App.db.Grades where horarios.Dias.Contains("Thursday") select horarios;
-            //sexta
-            var horaSexInDb = from Grade horarios in UFABC_Power_CR.App.db.Grades where horarios.Dias.Contains("Friday") select horarios;
-            //sábado
-            var horaSabInDb = from Grade horarios in UFABC_Power_CR.App.db.Grades where horarios.Dias.Contains("Saturday") select horarios;
-            //domingo
-            var horaDomInDb = from Grade horarios in UFABC_Power_CR.App.db.Grades where horarios.Dias.Contains("Sunday") select horarios;
-
-
-
-
-
-            List<ToDoItem> aux = new List<ToDoItem>();
-            
-            //carrega items hoje
-            foreach (ToDoItem item in itemsHojeInDB)
-            {
-                aux.Add(item);
-            }
-            HojeItems = new ObservableCollection<ToDoItem>(aux.OrderBy(z=> System.DateTime.Parse(z.ItemData)));
-            aux.Clear();
-
-
+            var toDoItemsInDB = from ToDoItem todo in UFABC_Power_CR.App.db.Items select todo;
 
             // Query the database and load all to-do items.
-            
+
             TodosItems = new ObservableCollection<ToDoItem>(toDoItemsInDB);
-            aux.Clear();
 
             // Specify the query for all categories in the database.
             var toDoCategoriesInDB = from ToDoCategory category in UFABC_Power_CR.App.db.Categories
@@ -333,66 +185,112 @@ namespace banco_de_dados_local.ViewModel
                         break;
                 }
             }
+        }
 
-            List<Grade> a = new List<Grade>();
-            //hoje
-            foreach (Grade hora in horaHojeInDb)
+
+       public void loadAtivHoje()
+       {
+           //horários de hoje
+           var horaHojeInDb = from Grade horarios in UFABC_Power_CR.App.db.Grades where horarios.Dias.Contains(System.DateTime.Now.DayOfWeek.ToString()) select horarios;
+
+
+           HorariosHoje = new List<Grade>();
+
+           //hoje
+           foreach (Grade hora in horaHojeInDb)
+           {
+               HorariosHoje.Add(hora);
+           }
+
+           int dia = 0;
+
+           switch (System.DateTime.Now.DayOfWeek.ToString())
+           {
+               case ("Monday"):
+                   dia = 2;
+                   break;
+               case ("Tuesday"):
+                   dia = 3;
+                   break;
+               case ("Wednesday"):
+                   dia = 4;
+                   break;
+               case ("Thursday"):
+                   dia = 5;
+                   break;
+               case ("Friday"):
+                   dia = 6;
+                   break;
+               case ("Saturday"):
+                   dia = 7;
+                   break;
+           }
+
+           foreach (GradeHelp grade in UFABC_Power_CR.App.db.GradesHelp)
+           {
+               if (grade.Hr1_Dia == dia)
+               {
+                   HorariosHoje.Add(new Grade { Nome = grade.Disciplina + " (" + grade.Codigo + ")", Local = grade.Hr1_Local, HoraInicio = grade.Hr1_Inicio, HoraFim = grade.Hr1_Fim, Aula = true });
+               }
+               else if (grade.Hr2_Dia == dia)
+               {
+                   HorariosHoje.Add(new Grade { Nome = grade.Disciplina + " (" + grade.Codigo + ")", Local = grade.Hr2_Local, HoraInicio = grade.Hr2_Inicio, HoraFim = grade.Hr2_Fim, Aula = true });
+               }
+               else if (grade.Hr3_Dia == dia)
+               {
+                   HorariosHoje.Add(new Grade { Nome = grade.Disciplina + " (" + grade.Codigo + ")", Local = grade.Hr3_Local, HoraInicio = grade.Hr3_Inicio, HoraFim = grade.Hr3_Fim, Aula = true });
+               }
+               else if (grade.Lab1_Dia == dia)
+               {
+                   HorariosHoje.Add(new Grade { Nome = grade.Disciplina + " (" + grade.Codigo + ")", Local = grade.Lab1_Local, HoraInicio = grade.Lab1_Inicio, HoraFim = grade.Lab1_Fim, Aula = true });
+               }
+               else if (grade.Lab2_Dia == dia)
+               {
+                   HorariosHoje.Add(new Grade { Nome = grade.Disciplina + " (" + grade.Codigo + ")", Local = grade.Lab2_Local, HoraInicio = grade.Lab2_Inicio, HoraFim = grade.Lab2_Fim, Aula = true });
+               }
+           }
+       }
+
+        public void loadMateriasQuad()
+        {
+            //matérias quadri
+            var AlunoInDb = from Aluno aluno in UFABC_Power_CR.App.db.Aluno select aluno;
+            foreach (Aluno aluno in AlunoInDb)
             {
-                a.Add(hora);
+                var materiaQuadInDB = from Historico hist in UFABC_Power_CR.App.db.Historicos where hist.Quadrimestre == aluno.QuadriAtual select hist;
+                MateriasNoQuad = new ObservableCollection<Historico>(materiaQuadInDB);
             }
-            HorariosHoje = new ObservableCollection<Grade>(a.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
-            a.Clear();
-            //segunda
-            foreach (Grade hora in horaSegInDb)
-            {
-                a.Add(hora);
-            }
+        }
+
+        // Query database and load the collections and list used by the pivot pages.
+        public void LoadCollectionsFromDatabase()
+        {
+
+            //query para items hoje
+            var itemsHojeInDB = from ToDoItem todo in UFABC_Power_CR.App.db.Items where todo.ItemData.Equals(System.DateTime.Now.ToShortDateString()) ||
+                                todo.ItemData.Equals(System.DateTime.Now.AddDays(1).ToShortDateString()) ||
+                                todo.ItemData.Equals(System.DateTime.Now.AddDays(2).ToShortDateString()) ||
+                                todo.ItemData.Equals(System.DateTime.Now.AddDays(3).ToShortDateString()) ||
+                                todo.ItemData.Equals(System.DateTime.Now.AddDays(4).ToShortDateString()) ||
+                                todo.ItemData.Equals(System.DateTime.Now.AddDays(5).ToShortDateString()) ||
+                                todo.ItemData.Equals(System.DateTime.Now.AddDays(6).ToShortDateString()) ||
+                                todo.ItemData.Equals(System.DateTime.Now.AddDays(7).ToShortDateString())
+                                select todo;
+
+
+            List<ToDoItem> aux = new List<ToDoItem>();
             
-            HorariosSeg = new ObservableCollection<Grade>(a.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
-            a.Clear();
-            //terça
-            foreach (Grade hora in horaTerInDb)
+            //carrega items hoje
+            foreach (ToDoItem item in itemsHojeInDB)
             {
-                a.Add(hora);
-            }
-            HorariosTer = new ObservableCollection<Grade>(a.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
-            a.Clear();
-            //quarta
-            foreach (Grade hora in horaQuaInDb)
-            {
-                a.Add(hora);
-            }
-            HorariosQua = new ObservableCollection<Grade>(a.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
-            a.Clear();
-            //quinta
-            foreach (Grade hora in horaQuiInDb)
-            {
-                a.Add(hora);
-            }
-            HorariosQui = new ObservableCollection<Grade>(a.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
-            a.Clear();
-            //sexta
-            foreach (Grade hora in horaSexInDb)
-            {
-                a.Add(hora);
-            }
-            HorariosSex = new ObservableCollection<Grade>(a.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
-            a.Clear();
-            //sábado
-            foreach (Grade hora in horaSabInDb)
-            {
-                a.Add(hora);
+                aux.Add(item);
             }
 
-            HorariosSab = new ObservableCollection<Grade>(a.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
-            a.Clear();
-            //domingo
-            foreach (Grade hora in horaDomInDb)
-            {
-                a.Add(hora);
-            }
-            HorariosDom = new ObservableCollection<Grade>(a.OrderBy(x => System.DateTime.Parse(x.HoraInicio)));
+            HojeItems = new ObservableCollection<ToDoItem>(aux.OrderBy(z=> System.DateTime.Parse(z.ItemData)));
+            aux.Clear();
 
+            loadAtivHoje();
+            
 
             // Load a list of all categories.
             CategoriesList = UFABC_Power_CR.App.db.Categories.ToList();
@@ -400,8 +298,6 @@ namespace banco_de_dados_local.ViewModel
         }
 
         
-
-
 
         public  List<Historico> CarregaMateriasMaiorConceito()
         {
@@ -429,9 +325,6 @@ namespace banco_de_dados_local.ViewModel
         }
 
 
-
-
-
         public List<Grade> CarregaAtividades(string diaSemana)
         {
             var query = from Grade ativ in UFABC_Power_CR.App.db.Grades where ativ.Dias.Contains(diaSemana) select ativ;
@@ -442,9 +335,6 @@ namespace banco_de_dados_local.ViewModel
             }
             return atividades;
         }
-
-
-
 
         public  List<Historico> CarregaMaterias(bool materiasRefeitas)
         {

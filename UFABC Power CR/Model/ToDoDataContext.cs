@@ -28,9 +28,13 @@ namespace banco_de_dados_local.Model
 
         public Table<Grade> Grades;
 
+        public Table<GradeHelp> GradesHelp;
+
         public Table<Materia> Materias;
 
         public Table<Professor> Professores;
+
+        public Table<Rotas> rotas;
     }
 
 
@@ -340,53 +344,36 @@ namespace banco_de_dados_local.Model
             }
         }
 
-        private int _helpId;
+        private int _uid;
         [Column]
-        public int HelpId
+        public int Uid
         {
-            get { return _helpId; }
+            get { return _uid; }
             set
             {
-                if (_helpId != value)
+                if (_uid != value)
                 {
-                    NotifyPropertyChanging("HelpId");
+                    NotifyPropertyChanging("Uid");
 
-                    _helpId = value;
-                    NotifyPropertyChanged("HelpId");
+                    _uid = value;
+                    NotifyPropertyChanged("Uid");
                 }
             }
         }
 
-        private int _fbId;
+        private int _tipo_usuario;
         [Column]
-        public int FbID
+        public int Tipo_Usuario
         {
-            get { return _fbId; }
+            get { return _tipo_usuario; }
             set
             {
-                if (_fbId != value)
+                if (_tipo_usuario != value)
                 {
-                    NotifyPropertyChanging("FbId");
+                    NotifyPropertyChanging("Tipo_Usuario");
 
-                    _fbId = value;
-                    NotifyPropertyChanged("FbId");
-                }
-            }
-        }
-
-        private int _fbToken;
-        [Column]
-        public int FbToken
-        {
-            get { return _fbToken; }
-            set
-            {
-                if (_fbToken != value)
-                {
-                    NotifyPropertyChanging("FbToken");
-
-                    _fbToken = value;
-                    NotifyPropertyChanged("FbToken");
+                    _tipo_usuario = value;
+                    NotifyPropertyChanged("Tipo_Usuario");
                 }
             }
         }
@@ -915,23 +902,6 @@ namespace banco_de_dados_local.Model
             }
         }
 
-        private string _sala;
-        [Column]
-        public string Sala
-        {
-            get { return _sala; }
-            set
-            {
-                if (_sala != value)
-                {
-                    NotifyPropertyChanging("Sala");
-
-                    _sala = value;
-                    NotifyPropertyChanged("Sala");
-                }
-            }
-        }
-
         private string _horaInicio;
 
         [Column]
@@ -986,7 +956,6 @@ namespace banco_de_dados_local.Model
             }
         }
 
-
         private bool _aula;
 
         [Column]
@@ -1004,9 +973,8 @@ namespace banco_de_dados_local.Model
                 }
             }
         }
-
-       
         
+
         [Column(IsVersion = true)]
         private Binary _version;
 
@@ -1041,6 +1009,501 @@ namespace banco_de_dados_local.Model
         #endregion
     }
 
+    [Table]
+    public class GradeHelp : INotifyPropertyChanged, INotifyPropertyChanging
+    {
+        private int _Id;
+        [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "INT NOT NULL Identity", CanBeNull = false, AutoSync = AutoSync.OnInsert)]
+        public int Id
+        {
+            get { return _Id; }
+            set
+            {
+                if (_Id != value)
+                {
+                    NotifyPropertyChanging("Id");
+                    _Id = value;
+                    NotifyPropertyChanged("Id");
+                }
+            }
+        }
+
+        private string _disciplina;
+        [Column]
+        public string Disciplina
+        {
+            get { return _disciplina; }
+            set
+            {
+                if (_disciplina != value)
+                {
+                    NotifyPropertyChanging("Disciplina");
+
+                    _disciplina = value;
+                    NotifyPropertyChanged("Disciplina");
+                }
+            }
+        }
+
+        private string _turma;
+        [Column]
+        public string Turma
+        {
+            get { return _turma; }
+            set
+            {
+                if (_turma != value)
+                {
+                    NotifyPropertyChanging("Turma");
+
+                    _turma = value;
+                    NotifyPropertyChanged("Turma");
+                }
+            }
+        }
+
+        private string _codigo;
+        [Column]
+        public string Codigo
+        {
+            get { return _codigo; }
+            set
+            {
+                if (_codigo != value)
+                {
+                    NotifyPropertyChanging("Codigo");
+
+                    _codigo = value;
+                    NotifyPropertyChanged("Codigo");
+                }
+            }
+        }
+
+        private string _prof_teoria;
+        [Column]
+        public string Prof_Teoria
+        {
+            get { return _prof_teoria; }
+            set
+            {
+                if (_prof_teoria != value)
+                {
+                    NotifyPropertyChanging("Prof_Teoria");
+
+                    _prof_teoria = value;
+                    NotifyPropertyChanged("Prof_Teoria");
+                }
+            }
+        }
+
+        private string _prof_pratica;
+        [Column]
+        public string Prof_Pratica
+        {
+            get { return _prof_pratica; }
+            set
+            {
+                if (_prof_pratica != value)
+                {
+                    NotifyPropertyChanging("Prof_Pratica");
+
+                    _prof_pratica = value;
+                    NotifyPropertyChanged("Prof_Pratica");
+                }
+            }
+        }
+
+        private int _hr1_dia;
+        [Column]
+        public int Hr1_Dia
+        {
+            get { return _hr1_dia; }
+            set
+            {
+                if (_hr1_dia != value)
+                {
+                    NotifyPropertyChanging("Hr1_Dia");
+
+                    _hr1_dia = value;
+                    NotifyPropertyChanged("Hr1_Dia");
+                }
+            }
+        }
+
+        private string _hr1_inicio;
+        [Column]
+        public string Hr1_Inicio
+        {
+            get { return _hr1_inicio; }
+            set
+            {
+                if (_hr1_inicio != value)
+                {
+                    NotifyPropertyChanging("Hr1_Inicio");
+
+                    _hr1_inicio = value;
+                    NotifyPropertyChanged("Hr1_Inicio");
+                }
+            }
+        }
+
+        private string _hr1_fim;
+        [Column]
+        public string Hr1_Fim
+        {
+            get { return _hr1_fim; }
+            set
+            {
+                if (_hr1_fim != value)
+                {
+                    NotifyPropertyChanging("Hr1_Fim");
+
+                    _hr1_fim = value;
+                    NotifyPropertyChanged("Hr1_Fim");
+                }
+            }
+        }
+
+        private string _hr1_local;
+        [Column]
+        public string Hr1_Local
+        {
+            get { return _hr1_local; }
+            set
+            {
+                if (_hr1_local != value)
+                {
+                    NotifyPropertyChanging("Hr1_Local");
+
+                    _hr1_local = value;
+                    NotifyPropertyChanged("Hr1_Local");
+                }
+            }
+        }
+
+        private int _hr2_dia;
+        [Column]
+        public int Hr2_Dia
+        {
+            get { return _hr2_dia; }
+            set
+            {
+                if (_hr2_dia != value)
+                {
+                    NotifyPropertyChanging("Hr2_Dia");
+
+                    _hr2_dia = value;
+                    NotifyPropertyChanged("Hr2_Dia");
+                }
+            }
+        }
+
+        private string _hr2_inicio;
+        [Column]
+        public string Hr2_Inicio
+        {
+            get { return _hr2_inicio; }
+            set
+            {
+                if (_hr2_inicio != value)
+                {
+                    NotifyPropertyChanging("Hr2_Inicio");
+
+                    _hr2_inicio = value;
+                    NotifyPropertyChanged("Hr2_Inicio");
+                }
+            }
+        }
+
+        private string _hr2_fim;
+        [Column]
+        public string Hr2_Fim
+        {
+            get { return _hr2_fim; }
+            set
+            {
+                if (_hr2_fim != value)
+                {
+                    NotifyPropertyChanging("Hr2_Fim");
+
+                    _hr2_fim = value;
+                    NotifyPropertyChanged("Hr2_Fim");
+                }
+            }
+        }
+
+        private string _hr2_local;
+        [Column]
+        public string Hr2_Local
+        {
+            get { return _hr2_local; }
+            set
+            {
+                if (_hr2_local != value)
+                {
+                    NotifyPropertyChanging("Hr2_Local");
+
+                    _hr2_local = value;
+                    NotifyPropertyChanged("Hr2_Local");
+                }
+            }
+        }
+
+        private int _hr3_dia;
+        [Column]
+        public int Hr3_Dia
+        {
+            get { return _hr3_dia; }
+            set
+            {
+                if (_hr3_dia != value)
+                {
+                    NotifyPropertyChanging("Hr3_Dia");
+
+                    _hr3_dia = value;
+                    NotifyPropertyChanged("Hr3_Dia");
+                }
+            }
+        }
+
+        private string _hr3_inicio;
+        [Column]
+        public string Hr3_Inicio
+        {
+            get { return _hr3_inicio; }
+            set
+            {
+                if (_hr3_inicio != value)
+                {
+                    NotifyPropertyChanging("Hr3_Inicio");
+
+                    _hr3_inicio = value;
+                    NotifyPropertyChanged("Hr3_Inicio");
+                }
+            }
+        }
+
+        private string _hr3_fim;
+        [Column]
+        public string Hr3_Fim
+        {
+            get { return _hr3_fim; }
+            set
+            {
+                if (_hr3_fim != value)
+                {
+                    NotifyPropertyChanging("Hr3_Fim");
+
+                    _hr3_fim = value;
+                    NotifyPropertyChanged("Hr3_Fim");
+                }
+            }
+        }
+
+        private string _hr3_local;
+        [Column]
+        public string Hr3_Local
+        {
+            get { return _hr3_local; }
+            set
+            {
+                if (_hr3_local != value)
+                {
+                    NotifyPropertyChanging("Hr3_Local");
+
+                    _hr3_local = value;
+                    NotifyPropertyChanged("Hr3_Local");
+                }
+            }
+        }
+
+        private int _lab1_dia;
+        [Column]
+        public int Lab1_Dia
+        {
+            get { return _lab1_dia; }
+            set
+            {
+                if (_lab1_dia != value)
+                {
+                    NotifyPropertyChanging("Lab1_Dia");
+
+                    _lab1_dia = value;
+                    NotifyPropertyChanged("Lab1_Dia");
+                }
+            }
+        }
+
+        private string _lab1_inicio;
+        [Column]
+        public string Lab1_Inicio
+        {
+            get { return _lab1_inicio; }
+            set
+            {
+                if (_lab1_inicio != value)
+                {
+                    NotifyPropertyChanging("Lab1_Inicio");
+
+                    _lab1_inicio = value;
+                    NotifyPropertyChanged("Lab1_Inicio");
+                }
+            }
+        }
+
+        private string _lab1_fim;
+        [Column]
+        public string Lab1_Fim
+        {
+            get { return _lab1_fim; }
+            set
+            {
+                if (_lab1_fim != value)
+                {
+                    NotifyPropertyChanging("Lab1_Fim");
+
+                    _lab1_fim = value;
+                    NotifyPropertyChanged("Lab1_Fim");
+                }
+            }
+        }
+
+        private string _lab1_local;
+        [Column]
+        public string Lab1_Local
+        {
+            get { return _lab1_local; }
+            set
+            {
+                if (_lab1_local != value)
+                {
+                    NotifyPropertyChanging("Lab1_Local");
+
+                    _lab1_local = value;
+                    NotifyPropertyChanged("Lab1_Local");
+                }
+            }
+        }
+
+        private int _lab2_dia;
+        [Column]
+        public int Lab2_Dia
+        {
+            get { return _lab2_dia; }
+            set
+            {
+                if (_lab2_dia != value)
+                {
+                    NotifyPropertyChanging("Lab2_Dia");
+
+                    _lab2_dia = value;
+                    NotifyPropertyChanged("Lab2_Dia");
+                }
+            }
+        }
+
+        private string _lab2_inicio;
+        [Column]
+        public string Lab2_Inicio
+        {
+            get { return _lab2_inicio; }
+            set
+            {
+                if (_lab2_inicio != value)
+                {
+                    NotifyPropertyChanging("Lab2_Inicio");
+
+                    _lab2_inicio = value;
+                    NotifyPropertyChanged("Lab2_Inicio");
+                }
+            }
+        }
+
+        private string _lab2_fim;
+        [Column]
+        public string Lab2_Fim
+        {
+            get { return _lab2_fim; }
+            set
+            {
+                if (_lab2_fim != value)
+                {
+                    NotifyPropertyChanging("Lab2_Fim");
+
+                    _lab2_fim = value;
+                    NotifyPropertyChanged("Lab2_Fim");
+                }
+            }
+        }
+
+        private string _lab2_local;
+        [Column]
+        public string Lab2_Local
+        {
+            get { return _lab2_local; }
+            set
+            {
+                if (_lab2_local != value)
+                {
+                    NotifyPropertyChanging("Lab2_Local");
+
+                    _lab2_local = value;
+                    NotifyPropertyChanged("Lab2_Local");
+                }
+            }
+        }
+
+        private string _obs;
+        [Column]
+        public string Obs
+        {
+            get { return _lab2_local; }
+            set
+            {
+                if (_obs != value)
+                {
+                    NotifyPropertyChanging("Obs");
+
+                    _obs = value;
+                    NotifyPropertyChanged("Obs");
+                }
+            }
+        }
+
+        [Column(IsVersion = true)]
+        private Binary _version;
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify that a property changed
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanging Members
+
+        public event PropertyChangingEventHandler PropertyChanging;
+
+        // Used to notify that a property is about to change
+        private void NotifyPropertyChanging(string propertyName)
+        {
+            if (PropertyChanging != null)
+            {
+                PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+       
+    }
 
     [Table]
     public class Materia : INotifyPropertyChanged, INotifyPropertyChanging
@@ -1473,8 +1936,100 @@ namespace banco_de_dados_local.Model
         #endregion
     }
 
-   
 
-   
+
+    [Table]
+    public class Rotas : INotifyPropertyChanged, INotifyPropertyChanging
+    {
+
+        private int _Id;
+
+        [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "INT NOT NULL Identity", CanBeNull = false, AutoSync = AutoSync.OnInsert)]
+        public int Id
+        {
+            get { return _Id; }
+            set
+            {
+                if (_Id != value)
+                {
+                    NotifyPropertyChanging("Id");
+                    _Id = value;
+                    NotifyPropertyChanged("Id");
+                }
+            }
+        }
+
+
+        private int _origem;
+
+        [Column]
+        public int Origem
+        {
+            get { return _origem; }
+            set
+            {
+                if (_origem != value)
+                {
+                    NotifyPropertyChanging("Origem");
+
+                    _origem = value;
+                    NotifyPropertyChanged("Origem");
+                }
+            }
+        }
+
+        private int _destino;
+
+        [Column]
+        public int Destino
+        {
+            get { return _destino; }
+            set
+            {
+                if (_destino != value)
+                {
+                    NotifyPropertyChanging("Destino");
+
+                    _destino = value;
+                    NotifyPropertyChanged("Destino");
+                }
+            }
+        }
+
+
+
+        [Column(IsVersion = true)]
+        private Binary _version;
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Used to notify that a property changed
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanging Members
+
+        public event PropertyChangingEventHandler PropertyChanging;
+
+        // Used to notify that a property is about to change
+        private void NotifyPropertyChanging(string propertyName)
+        {
+            if (PropertyChanging != null)
+            {
+                PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+    }
 
 }

@@ -24,26 +24,24 @@
         <!--TitlePanel contains the name of the application and page title-->
 
         <!--ContentPanel - place additional content here-->
+
         <ScrollViewer Margin="0,80,0,-396" Grid.RowSpan="2" >
-            <StackPanel  Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1120">
-                <TextBlock Text="Digite seu nome de usuário"/>
-                <TextBox x:Name="tbUsuario" MaxLength="25" />
-                <TextBlock Text="Digite sua senha de acesso"/>
-                <TextBox x:Name="pbSenha" InputScope="Password" MaxLength="16"/>
-                <TextBlock Text="Digite seu nome"/>
-                <TextBox x:Name="txtBoxNome" InputScope="PersonalGivenName"/>
-                <TextBlock Text="Escolha o bacharelado interdisciplinar" />
-                <toolkit:ListPicker x:Name="cursoListPicker" Margin="12,12,0,12">
-                    <toolkit:ListPickerItem Content="Bacharelado em Ciência e Tecnologia" />
-                    <toolkit:ListPickerItem Content="Bacharelado em Ciências e Humanidades"/>
-                </toolkit:ListPicker>
-                <TextBlock Text="Digite o ano de ingresso"/>
-                <TextBox x:Name="tbAno" InputScope="Number" MaxLength="4" />
-                <TextBlock Text="Digite o quadrimestre que está cursando" />
-                <TextBox x:Name="tbQuadri" InputScope="Number" MaxLength="2" />
-                
-                <Button Content="Começar" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="Button_Click_1" Width="166" Margin="0,0,0,0" FontSize="28"/>
-            </StackPanel>
+            <Grid>
+                <StackPanel  Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="1120">
+                    <TextBlock Margin="12,0,0,0" Text="Digite seu nome de usuário"/>
+                    <TextBox x:Name="tbUsuario" MaxLength="25" />
+                    <TextBlock Margin="12,0,0,0" Text="Digite sua senha de acesso"/>
+                    <TextBox x:Name="pbSenha" InputScope="Password" MaxLength="16"/>
+                    <TextBlock Margin="12,0,0,0" Text="Escolha o bacharelado interdisciplinar" />
+                    <toolkit:ListPicker x:Name="cursoListPicker" Margin="12,12,0,12">
+                        <toolkit:ListPickerItem Content="Bacharelado em Ciência e Tecnologia" />
+                        <toolkit:ListPickerItem Content="Bacharelado em Ciências e Humanidades"/>
+                    </toolkit:ListPicker>
+                    <TextBlock Margin="12,0,0,0" Text="Digite o ano de ingresso"/>
+                    <TextBox x:Name="tbAno" InputScope="Number" MaxLength="4" />
+                </StackPanel>
+                <Button x:Name="btProx"  Content="Próximo" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="Button_Click_1" Margin="123,590,140,0" FontSize="28" Height="71"/>
+            </Grid>
         </ScrollViewer>
         <TextBlock HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="bem vindo(a)!" VerticalAlignment="Top" FontSize="48" Foreground="#FF009A22"/>
     </Grid>
